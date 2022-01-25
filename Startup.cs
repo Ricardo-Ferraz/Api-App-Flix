@@ -11,6 +11,14 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        
+        app.UseCors(x => x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+
+        app.UseHttpsRedirection(); 
+        
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();

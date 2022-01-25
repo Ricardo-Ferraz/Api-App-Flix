@@ -16,6 +16,10 @@ namespace Api_App_Flix.Controllers
         public async Task<IActionResult> GetAllAsync([FromServices] AppDbContext context)
         {
             var All = await context.Users.AsNoTracking().ToListAsync();
+            foreach (var user in All)
+            {
+                user.Password = "";
+            }
             return Ok(All);
         }
         
@@ -23,9 +27,48 @@ namespace Api_App_Flix.Controllers
         [Route("GetById/{id}")]
         public async Task<IActionResult> GetByIdAsync([FromServices] AppDbContext context, [FromRoute] int id)
         {
+
+            try
+            {
+                var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(
+                    element => element.Id == id);
+                if (user != null)
+                {
+                    user.Password = "";
+                    return Ok(user);
+                }
+
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        
+        [HttpGet]
+        [Route("GetByUsername/{username}")]
+        public async Task<IActionResult> GetByNameAsync([FromServices] AppDbContext context, [FromRoute] string username)
+        {
+            
             var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(
-                element => element.Id == id);
+                element => element.Username.Equals(username));
             return user != null ? Ok(user) : NotFound();
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> LoginAsync([FromServices] AppDbContext context, [FromBody] LoginUserViewModel model
+            )
+        {
+            var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(
+                element => element.Username.Equals(model.Username) && element.Password.Equals(model.Password));
+            if (user != null)
+            {
+                user.Password = "";
+                return Ok(user);
+            }
+            return NotFound();
         }
 
         [HttpPost]
