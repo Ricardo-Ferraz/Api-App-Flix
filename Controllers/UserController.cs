@@ -80,6 +80,11 @@ namespace Api_App_Flix.Controllers
                 return BadRequest();
             }
 
+            var test = await context.Users.AsNoTracking().FirstOrDefaultAsync(
+                element => element.Username.Equals(model.Username));
+          
+            if(test != null) return BadRequest();
+
             var user = new User()
             {
                 Username = model.Username,

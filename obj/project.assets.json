@@ -1860,19 +1860,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ricar\\.nuget\\packages\\": {}
+    "C:\\Users\\ricardo.ferraz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ricar\\RiderProjects\\Api-App-Flix\\Api-App-Flix.csproj",
+      "projectUniqueName": "C:\\Users\\ricardo.ferraz\\Desktop\\Projetos Pessoais\\Api-App-Flix\\Api-App-Flix.csproj",
       "projectName": "Api-App-Flix",
-      "projectPath": "C:\\Users\\ricar\\RiderProjects\\Api-App-Flix\\Api-App-Flix.csproj",
-      "packagesPath": "C:\\Users\\ricar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ricar\\RiderProjects\\Api-App-Flix\\obj\\",
+      "projectPath": "C:\\Users\\ricardo.ferraz\\Desktop\\Projetos Pessoais\\Api-App-Flix\\Api-App-Flix.csproj",
+      "packagesPath": "C:\\Users\\ricardo.ferraz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ricardo.ferraz\\Desktop\\Projetos Pessoais\\Api-App-Flix\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ricar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ricardo.ferraz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
