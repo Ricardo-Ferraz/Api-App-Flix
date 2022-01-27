@@ -10,7 +10,7 @@ public class Movie
     public string Description { get; set; }
     public string Cast { get; set; }
     public string Duration { get; set; }
-    
+    public string UrlImagem { get; set; }
     public virtual List<UserMovie> UserMovies { get; set; }
     public virtual List<MovieCategory> MovieCategories { get; set; }
 }
