@@ -7,6 +7,7 @@ public class User
     public string Password { get; set; }
     public string Role { get; set; }
     public DateTime Registration { get; set; }= DateTime.Now;
+    public string UrlImagem { get; set; }
     public string? Token { get; set; }
     
     public virtual List<UserMovie> UserMovies { get; set; }

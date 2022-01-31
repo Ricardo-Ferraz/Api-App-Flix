@@ -89,7 +89,8 @@ namespace Api_App_Flix.Controllers
             {
                 Username = model.Username,
                 Password = model.Password,
-                Role = model.Role
+                Role = model.Role,
+                UrlImagem= model.UrlImagem
             };
             try
             {
@@ -118,9 +119,10 @@ namespace Api_App_Flix.Controllers
             
             try
             {
-                user.Username = model.Username;
-                user.Password = model.Password;
-                user.Role = model.Role;
+                if(model.Username != "" && model.Username != null) user.Username = model.Username;
+                if(model.Password != "" && model.Password != null) user.Password = model.Password;
+                if(model.Role != "" && model.Role != null) user.Role = model.Role;
+                if(model.UrlImagem != "" && model.UrlImagem != null) user.UrlImagem= model.UrlImagem;
                 
                 context.Users.Update(user);
                 await context.SaveChangesAsync();
