@@ -34,11 +34,11 @@ namespace Api_App_Flix.Controllers
                 {
                     return Ok(movie);
                 }
-                return NotFound();
+                return NotFound("Filme não encontrado");
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest("Erro ao acessar o banco");
             }
         }
 
@@ -48,13 +48,13 @@ namespace Api_App_Flix.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("O modelo enviado não é válido");
             }
 
             var test = await context.Users.AsNoTracking().FirstOrDefaultAsync(
                 element => element.Username.Equals(model.Title));
           
-            if(test != null) return BadRequest();
+            if(test != null) return BadRequest("Filme já cadastrado no banco");
 
             var movie = new Movie()
             {
@@ -75,7 +75,7 @@ namespace Api_App_Flix.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest("Erro ao escrever no banco");
             }
         }
 
@@ -85,11 +85,11 @@ namespace Api_App_Flix.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("O modelo recebido não é válido");
             }
 
             var movie = await context.Movies.FirstOrDefaultAsync(x => x.Id == id);
-            if (movie == null) return NotFound();
+            if (movie == null) return NotFound("Filme não");
             
             try
             {

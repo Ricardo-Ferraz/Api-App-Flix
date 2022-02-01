@@ -10,6 +10,5 @@ public class CreateUserViewModel
     public string Password { get; set; }
     [Required]
     public string Role { get; set; }
-    [Required]
-    public string UrlImagem { get; set; }
+    public string? UrlImagem { get; set; }
 }

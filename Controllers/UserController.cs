@@ -38,11 +38,11 @@ namespace Api_App_Flix.Controllers
                     return Ok(user);
                 }
 
-                return NotFound();
+                return NotFound("Usuário não encontrado");
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest("Erro ao acessar o banco");
             }
         }
         
@@ -53,7 +53,7 @@ namespace Api_App_Flix.Controllers
             
             var user = await context.Users.AsNoTracking().FirstOrDefaultAsync(
                 element => element.Username.Equals(username));
-            return user != null ? Ok(user) : NotFound();
+            return user != null ? Ok(user) : NotFound("Usuário não encontrado");
         }
 
         [HttpPost]
@@ -68,7 +68,7 @@ namespace Api_App_Flix.Controllers
                 user.Password = "";
                 return Ok(user);
             }
-            return NotFound();
+            return NotFound("Usuário não encontrado");
         }
 
         [HttpPost]
@@ -77,20 +77,19 @@ namespace Api_App_Flix.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("O modelo recebido não é válido");
             }
 
             var test = await context.Users.AsNoTracking().FirstOrDefaultAsync(
                 element => element.Username.Equals(model.Username));
           
-            if(test != null) return BadRequest();
+            if(test != null) return BadRequest("Usuário já cadastrado");
 
             var user = new User()
             {
                 Username = model.Username,
                 Password = model.Password,
-                Role = model.Role,
-                UrlImagem= model.UrlImagem
+                Role = model.Role
             };
             try
             {
@@ -100,7 +99,7 @@ namespace Api_App_Flix.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest("Erro ao escrever no banco!");
             }
             
         }
@@ -111,11 +110,11 @@ namespace Api_App_Flix.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("O modelo recebido não é válido");
             }
 
             var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (user == null) return NotFound();
+            if (user == null) return NotFound("Usuário não encontrado");
             
             try
             {
@@ -131,7 +130,7 @@ namespace Api_App_Flix.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest("Erro ao acessar o banco");
             }
             
         }
@@ -140,7 +139,7 @@ namespace Api_App_Flix.Controllers
         public async Task<IActionResult> DeleteAsync([FromServices] AppDbContext context, [FromRoute] int id)
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.Id == id);
-            if (user == null) return NotFound();
+            if (user == null) return NotFound("Usuário não encontrado");
             try
             {
                 context.Users.Remove(user);
@@ -149,7 +148,7 @@ namespace Api_App_Flix.Controllers
             }
             catch (Exception e)
             {
-               return BadRequest();
+               return BadRequest("Erro ao acessar o banco");
             }
             
         }
